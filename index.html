@@ -1,49 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Interactive rating component</title>
+    <title>Interactive rating component</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Rating state start -->
+    <div class="card">
+      <div id="rating" class="rating">
+        <div class="logo-box">
+          <img src="/images/icon-star.svg" alt="star logo" class="logo" />
+        </div>
+        <div class="title">How did we do?</div>
+        <div class="body">
+          Please let us know how we did with your support request. All feedback
+          is appreciated to help us improve our offering!
+        </div>
+        <ul class="scores">
+          <li class="score">1</li>
+          <li class="score">2</li>
+          <li class="score">3</li>
+          <li class="score">4</li>
+          <li class="score">5</li>
+        </ul>
+        <button id="submit-button" class="button">Submit</button>
+      </div>
+      <!-- Rating state end -->
+      <!-- Thank you state start -->
+      <div id="thanks" class="thank-you hidden">
+        <img
+          src="/images/illustration-thank-you.svg"
+          alt="illustration of thank you"
+          class="image-thanks"
+        />
+        <div class="info">You selected <span id="value"></span> out of 5</div>
+        <div class="title">Thank you!</div>
+        We appreciate you taking the time to give a rating. If you ever need
+        more support, don’t hesitate to get in touch! -->
+      </div>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+      <!-- Thank you state end -->
+    </div>
+    <script>
+      var scores = document.getElementsByClassName("score");
+      var currentClicked = -1;
 
-  <!-- Rating state start -->
+      function toggleClicked(classList, i) {
+        if (classList.contains("clicked")) classList.remove("clicked");
+        else classList.add("clicked");
 
-  How did we do?
+        if (currentClicked != -1)
+          scores[currentClicked].classList.remove("clicked");
 
-  Please let us know how we did with your support request. All feedback is appreciated 
-  to help us improve our offering!
+        currentClicked = i;
+      }
 
-  1 2 3 4 5
+      function onSubmitClicked() {
+        if (currentClicked == -1) {
+          alert("Please select a rating");
+          return;
+        }
 
-  Submit
+        document.getElementById("value").innerHTML = currentClicked + 1;
+        document.getElementById("rating").classList.add("hidden");
+        document.getElementById("thanks").classList.remove("hidden");
+      }
 
-  <!-- Rating state end -->
+      document
+        .getElementById("submit-button")
+        .addEventListener("click", onSubmitClicked);
 
-  <!-- Thank you state start -->
-
-  You selected <!-- Add rating here --> out of 5
-
-  Thank you!
-
-  We appreciate you taking the time to give a rating. If you ever need more support, 
-  don’t hesitate to get in touch!
-
-  <!-- Thank you state end -->
-
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+      for (let i = 0; i < scores.length; i++)
+        scores[i].addEventListener("click", function () {
+          toggleClicked(scores[i].classList, i);
+        });
+    </script>
+  </body>
 </html>
