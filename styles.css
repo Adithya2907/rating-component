@@ -260,11 +260,7 @@ body {
   }
 
   .card {
-    padding: 0;
-  }
-
-  .thank-you {
-    padding: 34px 24px 37px;
+    padding: 24px 24px 32px;
   }
 
   .thank-you .body {
