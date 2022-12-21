@@ -6,12 +6,31 @@
   --clr-grey-dark: hsl(216, 12%, 54%);
   --clr-white: hsl(0 0% 100%);
 
-  --border-radius: 30px;
+  --fs-300: 0.875rem; /* 14px */
+  --fs-400: 0.9375rem; /* 15px */
+  --fs-500: 1rem; /* 16px */
+  --fs-600: 1.5rem; /* 24px */
+  --fs-700: 1.75rem; /* 28px */
 
-  --card-padding-top: 1.5rem;
-  --card-padding-other: 2rem;
+  --fs-title: var(--fs-700);
+  --fs-body: var(--fs-400);
+  --fs-scores: var(--fs-500);
+  --fs-button: var(--fs-400);
 
-  --image-mg-bt: 2rem;
+  --card-radius: 30px;
+
+  --card-space: 32px;
+
+  --logo-height: 16px;
+  --logo-width: 16.75px;
+  --logo-box-dimensions: 48px;
+
+  --image-height: 108px;
+  --image-width: 162px;
+
+  --score-box-dimension: 51px;
+
+  --button-padding: 13px;
 }
 
 /*=============
@@ -49,7 +68,7 @@ svg {
 
 body {
   font-family: "Overpass", sans-serif;
-  font-size: 0.9375rem; /* 15px */
+  font-size: var(--fs-body);
   color: var(--clr-grey);
   background: var(--clr-secondary-dark);
   display: grid;
@@ -58,14 +77,17 @@ body {
 }
 
 .button {
+  width: 100%;
   background-color: var(--clr-primary);
   border: none;
   color: var(--clr-white);
   font-weight: 700;
   line-height: 1.26;
-  padding: 0.8125rem 8.625rem;
+  padding-top: var(--button-padding);
+  padding-bottom: var(--button-padding);
   border-radius: 22.5px;
   margin-top: 2rem;
+  font-size: var(--fs-button);
   text-transform: uppercase;
   letter-spacing: 2px;
   transition: 0.3s;
@@ -82,25 +104,23 @@ body {
     =============*/
 
 .card {
-  border-radius: var(--border-radius);
-  /* width: min(412px, calc(100% - 100px)); */
-  width: min(412px, calc(100%));
+  border-radius: var(--card-radius);
+  width: min(412px, calc(100% - 48px));
   background: radial-gradient(
     98.96% 98.96% at 50% 0%,
     #232a34 0%,
     #181e27 100%
   );
-  margin: 0 auto;
+  padding: var(--card-space);
 }
 
-.rating {
-  padding: var(--card-padding-other);
-  padding-top: var(--card-padding-top);
-}
+/*=============
+    RATING
+    =============*/
 
 .logo-box {
-  height: 48px;
-  width: 48px;
+  height: var(--logo-box-dimensions);
+  width: var(--logo-box-dimensions);
   background: var(--clr-secondary);
   display: grid;
   place-items: center;
@@ -109,12 +129,12 @@ body {
 }
 
 .logo {
-  height: 16px;
-  width: 16.75px;
+  height: var(--logo-height);
+  width: var(--logo-width);
 }
 
 .title {
-  font-size: 1.75rem;
+  font-size: var(--fs-title);
   color: var(--clr-white);
   line-height: 1.26;
   font-weight: 700;
@@ -122,6 +142,7 @@ body {
 }
 
 .body {
+  font-size: var(--fs-body);
   margin-bottom: 24px;
 }
 
@@ -131,12 +152,11 @@ body {
 }
 
 .score {
-  height: 51px;
-  width: 51px;
+  height: var(--score-box-dimension);
+  width: var(--score-box-dimension);
   background-color: var(--clr-secondary);
   border-radius: 50%;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: var(--fs-scores);
   display: grid;
   place-items: center;
   transition: 0.3s;
@@ -153,12 +173,17 @@ body {
   color: var(--clr-white);
 }
 
+/*=============
+    THANKS
+    =============*/
+
 .thank-you {
   text-align: center;
-  padding: 45px 40px 45px 32px;
 }
 
 .image-thanks {
+  height: var(--image-height);
+  width: var(--image-width);
   margin-inline: auto;
 }
 
@@ -178,4 +203,71 @@ body {
 
 .hidden {
   display: none;
+}
+
+/* 512px ==> MOBILES */
+@media (max-width: 32em) {
+  :root {
+    --fs-title: var(--fs-600);
+    --fs-body: var(--fs-300);
+    --fs-scores: var(--fs-300);
+    --fs-button: var(--fs-300);
+
+    --card-radius: 15px;
+
+    --card-space: 24px;
+
+    --logo-height: 13.33px;
+    --logo-width: 13.96px;
+    --logo-box-dimensions: 40px;
+
+    --score-box-dimension: 42px;
+
+    --button-padding: 12px;
+
+    --image-height: 96px;
+    --image-width: 144px;
+  }
+
+  body {
+    line-height: 1.375rem;
+  }
+
+  .button {
+    margin-top: 1.5rem;
+  }
+
+  .card {
+    padding-bottom: 32px;
+  }
+
+  .logo-box {
+    margin-bottom: 16px;
+  }
+
+  .title {
+    margin-bottom: 10px;
+  }
+
+  .info {
+    margin: 24px auto;
+    padding: 5px 12px;
+  }
+
+  .thank-you .title {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  .card {
+    padding: 0;
+  }
+
+  .thank-you {
+    padding: 34px 24px 37px;
+  }
+
+  .thank-you .body {
+    margin: 0;
+  }
 }
